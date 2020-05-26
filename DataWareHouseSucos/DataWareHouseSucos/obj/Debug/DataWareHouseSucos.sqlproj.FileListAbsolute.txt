@@ -1,0 +1,6 @@
+C:\Users\Ivo\Desktop\Projetos BI\DataWareHouseSucos\DataWareHouseSucos\bin\Debug\DataWareHouseSucos.dacpac
+C:\Users\Ivo\Desktop\Projetos BI\DataWareHouseSucos\DataWareHouseSucos\bin\Debug\DataWareHouseSucos.dll
+C:\Users\Ivo\Desktop\Projetos BI\DataWareHouseSucos\DataWareHouseSucos\bin\Debug\DataWareHouseSucos.pdb
+C:\Users\Ivo\Desktop\Projetos BI\DataWareHouseSucos\DataWareHouseSucos\obj\Debug\DataWareHouseSucos.sqlprojAssemblyReference.cache
+C:\Users\Ivo\Desktop\Projetos BI\DataWareHouseSucos\DataWareHouseSucos\obj\Debug\DataWareHouseSucos.dll
+C:\Users\Ivo\Desktop\Projetos BI\DataWareHouseSucos\DataWareHouseSucos\obj\Debug\DataWareHouseSucos.pdb

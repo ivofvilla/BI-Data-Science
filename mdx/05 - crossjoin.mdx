@@ -1,0 +1,38 @@
+select
+	non empty
+	(crossjoin ({
+		[Measures].[Faturamento],
+		[Measures].[Margem]
+	}, 
+	{
+		[Cliente].[Estado].&[São Paulo],
+		[Cliente].[Estado].&[Rio de Janeiro]
+	})) on rows,
+	({
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013] :
+		[Tempo].[Mës e Ano].&[2013]&[02-2013]&[03-2013]&[07-2013]
+	}) on columns
+from
+	[completo]
+----------------------------------------------------------------
+select
+	non empty
+
+	(crossjoin ({
+		[Produto].[Marca].&[Frescor do Verão],
+		[Produto].[Marca].&[Pedaços de Frutas]
+	}, 
+		(crossjoin ({
+			[Measures].[Faturamento],
+			[Measures].[Margem]
+		}, 
+		{
+			[Cliente].[Estado].&[São Paulo],
+			[Cliente].[Estado].&[Rio de Janeiro]
+		})))) on rows,
+	({
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013] :
+		[Tempo].[Mës e Ano].&[2013]&[02-2013]&[03-2013]&[07-2013]
+	}) on columns
+from
+	[completo]

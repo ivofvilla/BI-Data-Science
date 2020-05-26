@@ -1,0 +1,123 @@
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013].children
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+
+----------------------------
+with 
+	member [Measures].[Taxa Variacao] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013])',
+		format_string = "#,###.## %"
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013].children
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Taxa Variacao]
+	}) on columns
+from
+	[completo]
+
+
+
+----------------------------
+with 
+	member [Measures].[Taxa Variacao] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent)',
+		format_string = "#,###.## %"
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2013].&[Primeiro Semestre 2013].&[2013]&[01-2013]&[01-2013].children
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Taxa Variacao]
+	}) on columns
+from
+	[completo]
+
+----------------------------
+with 
+	member [Measures].[Taxa Variacao Trimestre] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent)',
+		format_string = "#,###.## %"
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].Members
+	}) on rows,
+	({
+		[Measures].[Taxa Variacao Trimestre]
+	}) on columns
+from
+	[completo]
+	
+----------------------------
+with 
+	member [Measures].[Taxa Variacao Trimestre] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent)',
+		format_string = "#,###.## %"
+	member [Measures].[Taxa Variacao Semestre] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent.Parent)', -- javascript?
+		format_string = "#,###.## %"
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].Members
+	}) on rows,
+	({
+		[Measures].[Taxa Variacao Trimestre],
+		[Measures].[Taxa Variacao Semestre] 
+	}) on columns
+from
+	[completo]
+
+----------------------------
+with 
+	member [Measures].[Taxa Variacao Trimestre] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent)',
+		format_string = "#,###.## %"
+	member [Measures].[Taxa Variacao Semestre] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent.Parent)', -- javascript?
+		format_string = "#,###.## %"
+	member [Measures].[Taxa Variacao Ano] as
+		'[Measures].[Faturamento] / (
+			[Measures].[Faturamento], 
+			[Tempo].[Hierarquia do Mês e Ano].Currentmember.Parent.Parent.Parent)', -- sim é javascript
+		format_string = "#,###.## %"
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].Members
+	}) on rows,
+	({
+		[Measures].[Taxa Variacao Trimestre],
+		[Measures].[Taxa Variacao Semestre],
+		[Measures].[Taxa Variacao Ano]
+	}) on columns
+from
+	[completo]

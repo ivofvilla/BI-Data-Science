@@ -1,0 +1,53 @@
+with
+	member [Measures].[Faturamento Desce 2] as
+		'([Measures].[Faturamento], ParallelPeriod([Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano], 2, [Tempo].[Hierarquia do Mês e Ano].Currentmember ))',
+		format_string = "#,###.00"
+select
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].members
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Faturamento Desce 2]
+	}) on columns
+from
+	[completo]
+
+----------------------------------
+
+with
+	member [Measures].[Faturamento sobe 6] as
+		'([Measures].[Faturamento], ParallelPeriod([Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano], -6, [Tempo].[Hierarquia do Mês e Ano].Currentmember ))',
+		format_string = "#,###.00"
+select
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].members
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Faturamento sobe 6]
+	}) on columns
+from
+	[completo]
+
+
+
+----------------------------------
+
+with
+	member [Measures].[Variacao Faturamento ano] as
+		'
+		([Measures].[Faturamento]) / 
+		([Measures].[Faturamento], ParallelPeriod([Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano], 12, [Tempo].[Hierarquia do Mês e Ano].Currentmember )) -1',
+		format_string = "#,###.00 %"
+select
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].members
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Variacao Faturamento ano]
+	}) on columns
+from
+	[completo]
+

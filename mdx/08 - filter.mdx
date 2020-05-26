@@ -1,0 +1,93 @@
+select
+	({
+		[Produto].[Hierarquia de Produtos].[Nível Marca].members
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[COMPLETO]
+where
+	[Tempo].[Ano].&[2014]
+
+----------------------------------------
+
+select
+	filter (
+		({
+			[Produto].[Hierarquia de Produtos].[Nível Marca].members
+		}),
+		[Measures].[Faturamento] >= 10000000
+	)on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[COMPLETO]
+where
+	[Tempo].[Ano].&[2014]
+
+------------------------------------------------------
+
+select
+	filter (
+		order(
+			({
+				[Produto].[Hierarquia de Produtos].[Nível Marca].members
+			}),
+			[Measures].[Faturamento],
+		bdesc),
+		[Measures].[Faturamento] >= 7000000
+	)on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[COMPLETO]
+where
+	[Tempo].[Ano].&[2014]
+
+
+
+------------------------------------------------------
+-- quando muda where pela colina da ruim perde o filtro
+select
+	filter (
+		order(
+			({
+				[Produto].[Hierarquia de Produtos].[Nível Marca].members
+			}),
+			[Measures].[Faturamento],
+		bdesc),
+		[Measures].[Faturamento] >= 7000000
+	)on rows,
+	({
+		[Tempo].[Ano].&[2014]
+	}) on columns
+from
+	[COMPLETO]
+where
+	[Measures].[Faturamento]
+
+-------------------------------------------------------
+select
+	filter (
+		order(
+			crossjoin(
+				({
+					[Tempo].[Ano].&[2014]
+				}),
+				({
+					[Produto].[Hierarquia de Produtos].[Nível Marca].members
+				})
+			),
+			[Measures].[Faturamento],
+		bdesc),
+		[Measures].[Faturamento] >= 7000000
+	)on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[COMPLETO]
+	

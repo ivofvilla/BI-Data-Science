@@ -1,0 +1,86 @@
+select 
+	({
+		[Produto].[Marca].&[Festival de Sabores],
+		[Produto].[Marca].&[Pedaços de Frutas],
+		[Produto].[Marca].&[Sabor da Montanha]
+	}) on rows,
+	({
+		[Tempo].[Ano].&[2014]
+	}) ON COLUMNS
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]
+
+---------------------------------------------------------
+
+select 
+	order (
+		({
+			[Produto].[Marca].&[Festival de Sabores],
+			[Produto].[Marca].&[Pedaços de Frutas],
+			[Produto].[Marca].&[Sabor da Montanha]
+		}),
+		[Measures].[Faturamento], desc
+	) on rows,
+	({
+		[Tempo].[Ano].&[2014]
+	}) ON COLUMNS
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]
+
+
+----------------------------------------------------------------
+
+---------------------------------------------------------
+
+select 
+	order (
+		crossjoin ({
+			[Cliente].[Código Da Cidade].&[São Paulo],
+			[Cliente].[Código Da Cidade].&[Rio de Janeiro],
+			[Cliente].[Código Da Cidade].&[Belo Horizonte]
+		},
+			({
+				[Produto].[Marca].&[Festival de Sabores],
+				[Produto].[Marca].&[Pedaços de Frutas],
+				[Produto].[Marca].&[Sabor da Montanha]
+			})
+		),
+		[Measures].[Faturamento], asc
+	) on rows,
+	({
+		[Tempo].[Ano].&[2014]
+	}) ON COLUMNS
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]
+
+----------------------------------------------------------------
+
+	
+select 
+	order (
+		crossjoin ({
+			[Cliente].[Código Da Cidade].&[São Paulo],
+			[Cliente].[Código Da Cidade].&[Rio de Janeiro],
+			[Cliente].[Código Da Cidade].&[Belo Horizonte]
+		},
+			({
+				[Produto].[Marca].&[Festival de Sabores],
+				[Produto].[Marca].&[Pedaços de Frutas],
+				[Produto].[Marca].&[Sabor da Montanha]
+			})
+		),
+		[Measures].[Faturamento], basc
+	) on rows,
+	({
+		[Tempo].[Ano].&[2014]
+	}) ON COLUMNS
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]

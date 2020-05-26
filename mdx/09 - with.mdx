@@ -1,0 +1,72 @@
+select 
+	({
+		[Produto].[Categoria].[Categoria].MEMBERS
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Faturamento Líquido]
+	})on columns
+from
+	[COMPLETO]
+WHERE
+	[Tempo].[Ano].&[2014]
+
+------------------------------------
+WITH
+	MEMBER [Measures].[Novo Faturamento Líquido] as '[Measures].[Faturamento] - [Measures].[Frete Rateio] - [Measures].[Imposto]'
+	MEMBER [Measures].[Variacao Faturamento] as '[Measures].[Novo Faturamento Líquido] / [Measures].[Faturamento]'
+select 
+	({
+		[Produto].[Categoria].[Categoria].MEMBERS
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Faturamento Líquido],
+		[Measures].[Novo Faturamento Líquido],
+		[Measures].[Variacao Faturamento]
+	})on columns
+from
+	[COMPLETO]
+WHERE
+	[Tempo].[Ano].&[2014]
+
+-------------------------------------------------------
+
+WITH
+	MEMBER [Measures].[Novo Faturamento Líquido] as '[Measures].[Faturamento] - [Measures].[Frete Rateio] - [Measures].[Imposto]',
+	FORMAT_STRING = "#,###.##"
+	MEMBER [Measures].[Variacao Faturamento] as '[Measures].[Novo Faturamento Líquido] / [Measures].[Faturamento]',
+	FORMAT_STRING = "#,###.## %"
+select 
+	({
+		[Produto].[Categoria].[Categoria].MEMBERS
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Faturamento Líquido],
+		[Measures].[Novo Faturamento Líquido],
+		[Measures].[Variacao Faturamento]
+	})on columns
+from
+	[COMPLETO]
+WHERE
+	[Tempo].[Ano].&[2014]
+-----------------------------------------------
+
+WITH
+	MEMBER [Tempo].[Mës e Ano].[Var Fer Jan] as
+	'(1 - ( [Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013] / [Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013] ))',
+	format_string "#,###.00 %"
+select 
+	({
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],	
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+		[Tempo].[Mës e Ano].[Var Fer Jan]
+	}) on rows,
+	({
+		[Produto].[Marca].members
+	})on columns
+from
+	[COMPLETO]
+WHERE
+	[Measures].[Faturamento]

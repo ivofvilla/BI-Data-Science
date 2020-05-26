@@ -1,0 +1,53 @@
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mës].[Nível Mês]
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+	-----------------------------
+
+with
+	member [Measures].[Variacao Faturamento] as
+	'[Measures].[Faturamento] - ([Measures].[Faturamento],[Tempo].[Hierarquia do Mês e Ano].Currentmember.PrevMember )',
+	format_string = "#,###.#"
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mës].[Nível Mês].members
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Variacao Faturamento]
+	}) on columns
+from
+	[completo]
+
+
+
+	-----------------------------
+
+with
+	member [Measures].[Variacao Faturamento] as
+	'[Measures].[Faturamento] - ([Measures].[Faturamento],[Tempo].[Hierarquia do Mês e Ano].Currentmember.PrevMember )',
+	format_string = "#,###.#"
+	member [Measures].[Variacao Faturamento %] as
+	'(([Measures].[Faturamento], [Tempo].[Hierarquia do Mês e Ano].Currentmember) /
+	 ([Measures].[Faturamento],[Tempo].[Hierarquia do Mês e Ano].Currentmember.PrevMember )) -1',
+	format_string = "#,###.00 %"
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Nível Mës e Ano].members
+	}) on rows,
+	({
+		[Measures].[Faturamento],
+		[Measures].[Variacao Faturamento],
+		[Measures].[Variacao Faturamento %]
+	}) on columns
+from
+	[completo]

@@ -1,0 +1,109 @@
+
+select
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014]
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+------------------------------------
+
+
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014],
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014].lag(3)
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+	----------------------------------------
+
+	
+select
+	non empty
+	({
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014],
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014].lag(3),
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014].lead(3)
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+---------------------------------------
+
+
+select
+	non empty
+	({
+		LastPeriods(6,
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014])
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+
+---------------------------------------
+
+
+select
+	non empty
+	({
+		LastPeriods(-6,
+		[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014])
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+	---------------------------------------
+
+
+select
+	non empty
+	({
+		head(
+			LastPeriods(6,
+			[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014])
+		,2 )
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+
+
+select
+	non empty
+	({
+		tail(
+			LastPeriods(6,
+			[Tempo].[Hierarquia do Mês e Ano].[Ano].&[2014].&[Primeiro Semestre 2014].&[2014]&[01-2014]&[02-2014].&[2014]&[01-2014]&[02-2014]&[06-2014])
+		,2 )
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[completo]
+
+
+
+
+

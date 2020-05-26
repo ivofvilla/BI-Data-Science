@@ -1,0 +1,69 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       [dbo].[DIm_Fabrica]
+       [dbo].[Dim_Marca]
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       The type for column Cod_Fabrica in table [dbo].[DIm_Fabrica] is currently  NVARCHAR (50) NOT NULL but is being changed
+         to  VARCHAR (50) NOT NULL. Data loss could occur.
+       The type for column Desc_Fabrica in table [dbo].[DIm_Fabrica] is currently  NVARCHAR (200) NULL but is being changed to 
+         VARCHAR (200) NULL. Data loss could occur.
+       The type for column Cod_Marca in table [dbo].[Dim_Marca] is currently  NVARCHAR (50) NOT NULL but is being changed to 
+         VARCHAR (50) NOT NULL. Data loss could occur.
+       The type for column Desc_Marca in table [dbo].[Dim_Marca] is currently  NVARCHAR (200) NULL but is being changed to 
+         VARCHAR (200) NULL. Data loss could occur.
+       The type for column Atr_Tamanho in table [dbo].[Dim_Produto] is currently  NVARCHAR (200) NULL but is being changed to 
+         VARCHAR (200) NULL. Data loss could occur.
+       The type for column Cod_Marca in table [dbo].[Dim_Produto] is currently  NVARCHAR (50) NULL but is being changed to 
+         VARCHAR (50) NULL. Data loss could occur.
+
+** User actions
+     Table rebuild
+       [dbo].[DIm_Fabrica] (Table)
+       [dbo].[Dim_Marca] (Table)
+     Alter
+       [dbo].[Dim_Produto] (Table)
+     Create
+       [dbo].[Dim_Tempo] (Table)
+       [dbo].[Fato_001] (Table)
+       [dbo].[Fato_002] (Table)
+       [dbo].[Fato_003] (Table)
+       [dbo].[Fato_004] (Table)
+       [dbo].[Fato_005] (Table)
+       [dbo].[FK_Fato_001_Dim_Cliente] (Foreign Key)
+       [dbo].[FK_Fato_001_Dim_Produto] (Foreign Key)
+       [dbo].[FK_Fato_001_Dim_Organizacional] (Foreign Key)
+       [dbo].[FK_Fato_001_Dim_Fabrica] (Foreign Key)
+       [dbo].[FK_Fato_001_Dim_Dia] (Foreign Key)
+       [dbo].[FK_Fato_002_Dim_Cliente] (Foreign Key)
+       [dbo].[FK_Fato_002_Dim_Produto] (Foreign Key)
+       [dbo].[FK_Fato_002_Dim_Fabrica] (Foreign Key)
+       [dbo].[FK_Fato_002_Dim_Dia] (Foreign Key)
+       [dbo].[FK_Fato_003_Dim_Fabrica] (Foreign Key)
+       [dbo].[FK_Fato_003_Dim_Dia] (Foreign Key)
+       [dbo].[FK_Fato_004_Dim_Cliente] (Foreign Key)
+       [dbo].[FK_Fato_004_Dim_Produto] (Foreign Key)
+       [dbo].[FK_Fato_004_Dim_Organizacional] (Foreign Key)
+       [dbo].[FK_Fato_004_Dim_Dia] (Foreign Key)
+       [dbo].[FK_Fato_005_Dim_Produto] (Foreign Key)
+       [dbo].[FK_Fato_005_Dim_Fabrica] (Foreign Key)
+       [dbo].[FK_Fato_005_Dim_Tempo] (Foreign Key)
+
+** Supporting actions
+     Drop
+       [dbo].[FK_Dim_Marca_x_Dim_Categoria] (Foreign Key)
+       [dbo].[FK_Dim_Produto_x_Dim_Marca] (Foreign Key)
+     Create
+       [dbo].[FK_Dim_Marca_x_Dim_Categoria] (Foreign Key)
+       [dbo].[FK_Dim_Produto_x_Dim_Marca] (Foreign Key)
+
+The type for column Cod_Fabrica in table [dbo].[DIm_Fabrica] is currently  NVARCHAR (50) NOT NULL but is being changed to  VARCHAR (50) NOT NULL. Data loss could occur.
+The type for column Desc_Fabrica in table [dbo].[DIm_Fabrica] is currently  NVARCHAR (200) NULL but is being changed to  VARCHAR (200) NULL. Data loss could occur.
+The type for column Cod_Marca in table [dbo].[Dim_Marca] is currently  NVARCHAR (50) NOT NULL but is being changed to  VARCHAR (50) NOT NULL. Data loss could occur.
+The type for column Desc_Marca in table [dbo].[Dim_Marca] is currently  NVARCHAR (200) NULL but is being changed to  VARCHAR (200) NULL. Data loss could occur.
+The type for column Atr_Tamanho in table [dbo].[Dim_Produto] is currently  NVARCHAR (200) NULL but is being changed to  VARCHAR (200) NULL. Data loss could occur.
+The type for column Cod_Marca in table [dbo].[Dim_Produto] is currently  NVARCHAR (50) NULL but is being changed to  VARCHAR (50) NULL. Data loss could occur.
+

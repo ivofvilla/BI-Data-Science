@@ -1,0 +1,46 @@
+select 
+	({ [Cliente].[Hierarquia Geográfica].[Nível Região].&[Sudeste].Children }) on rows,
+	({ 
+		[Tempo].[Mës e Ano].&[2014]&[01-2014]&[02-2014]&[04-2014] :
+		[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]
+	}) on columns
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]
+
+
+select 
+	({ [Cliente].[Hierarquia Geográfica].[Nível Região].&[Sul].&[Rio Grande do Sul].Parent }) on rows,
+	({ 
+		[Tempo].[Mës e Ano].&[2014]&[01-2014]&[02-2014]&[04-2014] :
+		[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]
+	}) on columns
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]
+
+
+select 
+	({Descendants([Cliente].[Hierarquia Geográfica].[Nível Região].&[Sul].&[Rio Grande do Sul])} ) on rows,
+	({ 
+		[Tempo].[Mës e Ano].&[2014]&[01-2014]&[02-2014]&[04-2014] :
+		[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]
+	}) on columns
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]
+
+
+select 
+	({Ascendants( [Cliente].[Hierarquia Geográfica].[Nível Região].&[Sul].&[Rio Grande do Sul].&[Porto Alegre].&[Lanche Rápido e Barato Porto Alegre - RS] )} ) on rows,
+	({ 
+		[Tempo].[Mës e Ano].&[2014]&[01-2014]&[02-2014]&[04-2014] :
+		[Tempo].[Mës e Ano].&[2014]&[02-2014]&[04-2014]&[12-2014]
+	}) on columns
+from 
+	[COMPLETO]
+where
+	[Measures].[Faturamento]

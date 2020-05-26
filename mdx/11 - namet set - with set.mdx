@@ -1,0 +1,42 @@
+with set [6 primeiros meses de 2013] as
+		'{
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]
+		}'
+select
+	({
+		[6 primeiros meses de 2013]
+	}) on rows,
+	({
+		[Measures].[Faturamento Líquido]
+	}) on columns
+from
+	[completo]
+		
+-------------------------------------------------------
+with set [6 primeiros meses de 2013] as
+		'{
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[01-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[02-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[01-2013]&[03-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[04-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[05-2013],
+		[Tempo].[Mës e Ano].&[2013]&[01-2013]&[02-2013]&[06-2013]
+		}'
+	member [Tempo].[Mës e Ano].[soma dos primeiros meses 2013] 
+		as 'sum( [6 primeiros meses de 2013], [Measures].[Faturamento Líquido] )'
+select
+	({
+		[6 primeiros meses de 2013],
+		[Tempo].[Mës e Ano].[soma dos primeiros meses 2013]
+	}) on rows,
+	({
+		[Measures].[Faturamento Líquido]
+	}) on columns
+from
+	[completo]
+		

@@ -1,0 +1,15 @@
+select
+	non empty
+	({
+	  [Produto].[Produto].members
+	}) on rows,
+	({
+		[Measures].[Faturamento]
+	}) on columns
+from
+	[COMPLETO]
+WHERE
+	(
+		[Cliente].[Hierarquia Segmento].[Nível Segmento].&[Farmácias].&[Drogas Super Brasília - DF]
+	)
+	
